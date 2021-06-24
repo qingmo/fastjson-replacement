@@ -1,7 +1,8 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
+    val kotlinVersion = "1.5.10"
     java
-    kotlin("jvm") version "1.5.10"
+    kotlin("jvm") version "$kotlinVersion"
 }
 
 group = "com.github.qingmo"
@@ -14,10 +15,13 @@ repositories {
 }
 
 dependencies {
+    val jacksonModuleVersion = "2.12.3"
     implementation(kotlin("stdlib"))
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:${jacksonModuleVersion}")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    testImplementation("junit:junit:4.12")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
+
 }
 
 tasks.withType<Wrapper> {
@@ -38,4 +42,9 @@ tasks.withType<JavaCompile> {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+
+    testLogging {
+        showStandardStreams = true
+        events("passed", "failed", "skipped")
+    }
 }
