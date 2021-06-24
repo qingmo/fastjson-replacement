@@ -1,16 +1,14 @@
 [中文文档](./README_CN.md) | [English Document](./README.md)
 
-## Why
+## 背景
 
-Why do we need replace `fastjson`? For it security issues, late of fix period and so on.
+为什么要替换`fastjson`? 因为其漏洞多，修复速度慢。为什么重造轮子？测试完备度不够，没有自动发布和及时更新版本。
 
-Why make new tools instead of using existing one? Because their bad tests(even in fastjson), and not auto publish after merged my pull requests that make me can not get new fix version from maven central repository.
+## 使用方法
 
-## How to Use
+**步骤1**:添加依赖
 
-**Step 1**: Add Dependencies
-
-Use default `jackson`version（current version is:`1.12.3`) proivded by current lib.
+使用默认的`jackson`版本（当前`1.12.3`) 
 
 `maven`
 
@@ -30,7 +28,7 @@ implementation("com.github.qingmo:fastjson-replacement:${currentVersion}")
 
 
 
-Use custom `jackson`version defined by user's project
+使用自定义版本的`jackson`版本
 
 `maven`
 
@@ -65,27 +63,27 @@ implementation("com.github.qingmo:fastjson-replacement:${currentVersion}") {
 }
 ```
 
-**Step 2**: Replace `fastjson` packages
+**步骤2**:替换fastjson的包
 
-**Replace method**
+**替换方法**
 
 ```shell
 import com.alibaba.fastjson.JSON
-replace with
+替换为
 import com.github.qingmo.json.JSON
 
 import com.alibaba.fastjson.JSONArray
-replace with
+替换为
 import com.github.qingmo.json.JSONArray
 
 import com.alibaba.fastjson.JSONObject
-replace with
+替换为
 import com.github.qingmo.json.JSONObject
 ```
 
 
 
-## References
+## 参考
 [jackson-datatype-fastjson](https://github.com/larva-zhang/jackson-datatype-fastjson/blob/master/src/test/java/com/github/larva/zhang/jackson/datatype/fastjson/SimpleReadTest.java)
 
 [Jackson替换fastjson](https://www.cnblogs.com/larva-zhh/p/11544317.html)
