@@ -1,4 +1,4 @@
-package com.github.qingmo.json
+package io.github.qingmo.json
 
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.databind.DeserializationFeature
@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.JavaType
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
-import com.github.qingmo.json.exception.JSONException
+import io.github.qingmo.json.exception.JSONException
 
 
 object JSON {
@@ -56,7 +56,7 @@ object JSON {
 
     fun parseArray(jsonString: String?): JSONArray {
         try {
-            val result:JSONArray = objectMapper.readValue(jsonString!!)
+            val result: JSONArray = objectMapper.readValue(jsonString!!)
             return result
         } catch (e: Exception) {
             throw JSONException(e)

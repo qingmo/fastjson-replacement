@@ -1,7 +1,7 @@
-package com.github.qingmo.json
+package io.github.qingmo.json
 
-import com.github.qingmo.json.JSON.parseObject
-import com.github.qingmo.json.JSON.toJSONString
+import io.github.qingmo.json.JSON.parseObject
+import io.github.qingmo.json.JSON.toJSONString
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import java.io.Serializable

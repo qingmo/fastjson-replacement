@@ -1,7 +1,7 @@
-package com.github.qingmo.json
+package io.github.qingmo.json
 
 import com.fasterxml.jackson.databind.exc.MismatchedInputException
-import com.github.qingmo.json.exception.JSONException
+import io.github.qingmo.json.exception.JSONException
 import java.lang.Exception
 
 import java.util.HashMap
@@ -35,7 +35,7 @@ class ConvertTest {
             fail("Should not pass")
         } catch (e: JSONException) {
             TestUtils.verifyException(e, "Cannot deserialize value of type")
-            TestUtils.verifyException(e, "com.github.qingmo.json.JSONArray")
+            TestUtils.verifyException(e, "io.github.qingmo.json.JSONArray")
             TestUtils.verifyException(e, "VALUE_STRING")
         }
     }

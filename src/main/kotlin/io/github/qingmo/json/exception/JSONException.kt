@@ -1,4 +1,4 @@
-package com.github.qingmo.json.exception
+package io.github.qingmo.json.exception
 
 class JSONException : RuntimeException {
     constructor() : super() {}

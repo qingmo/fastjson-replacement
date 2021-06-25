@@ -1,6 +1,6 @@
-package com.github.qingmo.json
+package io.github.qingmo.json
 
-import com.github.qingmo.json.JSON.parseArray
+import io.github.qingmo.json.JSON.parseArray
 import java.math.BigDecimal
 import java.math.BigInteger
 import java.util.ArrayList

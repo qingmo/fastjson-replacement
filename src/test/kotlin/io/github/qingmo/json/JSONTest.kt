@@ -1,4 +1,4 @@
-package com.github.qingmo.json
+package io.github.qingmo.json
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.annotation.JsonUnwrapped

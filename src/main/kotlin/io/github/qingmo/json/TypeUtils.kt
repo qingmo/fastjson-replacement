@@ -1,6 +1,6 @@
-package com.github.qingmo.json
+package io.github.qingmo.json
 
-import com.github.qingmo.json.exception.JSONException
+import io.github.qingmo.json.exception.JSONException
 import java.math.BigDecimal
 
 import java.math.BigInteger

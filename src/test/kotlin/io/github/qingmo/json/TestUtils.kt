@@ -1,4 +1,4 @@
-package com.github.qingmo.json
+package io.github.qingmo.json
 
 import java.util.Locale
 import kotlin.test.fail
