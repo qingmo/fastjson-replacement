@@ -16,7 +16,7 @@ Use default `jackson`version（current version is:`1.12.3`) proivded by current 
 
 ```xml
 <dependency>
-    <groupId>com.github.qingmo</groupId>
+    <groupId>io.github.qingmo</groupId>
     <artifact>fastjson-replacement</artifact>
     <version>${currentVersion}</version>
 </dependency>
@@ -25,7 +25,7 @@ Use default `jackson`version（current version is:`1.12.3`) proivded by current 
 `gradle`
 
 ```kotlin
-implementation("com.github.qingmo:fastjson-replacement:${currentVersion}")
+implementation("io.github.qingmo:fastjson-replacement:${currentVersion}")
 ```
 
 
@@ -36,7 +36,7 @@ Use custom `jackson`version defined by user's project
 
 ```xml
 <dependency>
-    <groupId>com.github.qingmo</groupId>
+    <groupId>io.github.qingmo</groupId>
     <artifactId>fastjson-replacement</artifactId>
     <version>${currentVersion}</version>
     <exclusions>
@@ -59,7 +59,7 @@ Use custom `jackson`version defined by user's project
 `gradle`
 
 ```kotlin
-implementation("com.github.qingmo:fastjson-replacement:${currentVersion}") {
+implementation("io.github.qingmo:fastjson-replacement:${currentVersion}") {
 		exclude(group = "com.fasterxml.jackson.core")
     exclude(group = "com.fasterxml.jackson"
 }
@@ -72,15 +72,15 @@ implementation("com.github.qingmo:fastjson-replacement:${currentVersion}") {
 ```shell
 import com.alibaba.fastjson.JSON
 replace with
-import com.github.qingmo.json.JSON
+import io.github.qingmo.json.JSON
 
 import com.alibaba.fastjson.JSONArray
 replace with
-import com.github.qingmo.json.JSONArray
+import io.github.qingmo.json.JSONArray
 
 import com.alibaba.fastjson.JSONObject
 replace with
-import com.github.qingmo.json.JSONObject
+import io.github.qingmo.json.JSONObject
 ```
 
 

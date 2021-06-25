@@ -14,7 +14,7 @@
 
 ```xml
 <dependency>
-    <groupId>com.github.qingmo</groupId>
+    <groupId>io.github.qingmo</groupId>
     <artifact>fastjson-replacement</artifact>
     <version>${currentVersion}</version>
 </dependency>
@@ -23,7 +23,7 @@
 `gradle`
 
 ```kotlin
-implementation("com.github.qingmo:fastjson-replacement:${currentVersion}")
+implementation("io.github.qingmo:fastjson-replacement:${currentVersion}")
 ```
 
 
@@ -34,7 +34,7 @@ implementation("com.github.qingmo:fastjson-replacement:${currentVersion}")
 
 ```xml
 <dependency>
-    <groupId>com.github.qingmo</groupId>
+    <groupId>io.github.qingmo</groupId>
     <artifactId>fastjson-replacement</artifactId>
     <version>${currentVersion}</version>
     <exclusions>
@@ -57,7 +57,7 @@ implementation("com.github.qingmo:fastjson-replacement:${currentVersion}")
 `gradle`
 
 ```kotlin
-implementation("com.github.qingmo:fastjson-replacement:${currentVersion}") {
+implementation("io.github.qingmo:fastjson-replacement:${currentVersion}") {
 		exclude(group = "com.fasterxml.jackson.core")
     exclude(group = "com.fasterxml.jackson"
 }
@@ -70,15 +70,15 @@ implementation("com.github.qingmo:fastjson-replacement:${currentVersion}") {
 ```shell
 import com.alibaba.fastjson.JSON
 替换为
-import com.github.qingmo.json.JSON
+import io.github.qingmo.json.JSON
 
 import com.alibaba.fastjson.JSONArray
 替换为
-import com.github.qingmo.json.JSONArray
+import io.github.qingmo.json.JSONArray
 
 import com.alibaba.fastjson.JSONObject
 替换为
-import com.github.qingmo.json.JSONObject
+import io.github.qingmo.json.JSONObject
 ```
 
 
