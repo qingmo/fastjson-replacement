@@ -3,9 +3,13 @@ package io.github.qingmo.json
 import com.fasterxml.jackson.databind.exc.MismatchedInputException
 import io.github.qingmo.json.exception.JSONException
 import java.lang.Exception
+import java.time.LocalDateTime
 
 import java.util.HashMap
 import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertNotNull
+import kotlin.test.assertTrue
 import kotlin.test.fail
 
 
@@ -38,5 +42,24 @@ class ConvertTest {
             TestUtils.verifyException(e, "io.github.qingmo.json.JSONArray")
             TestUtils.verifyException(e, "VALUE_STRING")
         }
+    }
+
+    @Test
+    fun `test java LocalDateTime`() {
+        val data = DataWithTime()
+        data.haha = "共产党100周年快乐"
+        data.time = LocalDateTime.of(2021, 7, 1, 0, 0, 0)
+
+        val result = JSON.toJSONString(data)
+        assertNotNull(result)
+        assertTrue(result.contains("共产党100周年快乐"))
+        assertTrue(result.contains("2021-07-01 00:00:00"))
+        val retObj = JSON.parseObject(result, DataWithTime::class.java)
+        assertEquals(data.time, retObj.time)
+    }
+
+    private class DataWithTime {
+        var haha: String? = null
+        var time: LocalDateTime? = null
     }
 }
