@@ -1,9 +1,10 @@
 package io.github.qingmo.json
 
-import com.fasterxml.jackson.databind.exc.MismatchedInputException
 import io.github.qingmo.json.exception.JSONException
-import java.lang.Exception
+import org.intellij.lang.annotations.Language
+import java.text.SimpleDateFormat
 import java.time.LocalDateTime
+import java.util.Date
 
 import java.util.HashMap
 import kotlin.test.Test
@@ -46,7 +47,7 @@ class ConvertTest {
 
     @Test
     fun `test java LocalDateTime`() {
-        val data = DataWithTime()
+        val data = DataWithLocalDateTime()
         data.haha = "共产党100周年快乐"
         data.time = LocalDateTime.of(2021, 7, 1, 0, 0, 0)
 
@@ -54,12 +55,30 @@ class ConvertTest {
         assertNotNull(result)
         assertTrue(result.contains("共产党100周年快乐"))
         assertTrue(result.contains("2021-07-01 00:00:00"))
-        val retObj = JSON.parseObject(result, DataWithTime::class.java)
+        val retObj = JSON.parseObject(result, DataWithLocalDateTime::class.java)
         assertEquals(data.time, retObj.time)
     }
 
-    private class DataWithTime {
+    @Test
+    fun `test java Date`() {
+        @Language("JSON") val data = """{
+          "haha": "共产党100周年快乐",
+          "time": "2021-07-01 00:00:00"
+        }"""
+        val result = JSON.parseObject(data, DataWithDate::class.java)
+        assertNotNull(result)
+        assertEquals("共产党100周年快乐", result.haha)
+        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+        assertEquals(simpleDateFormat.parse("2021-07-01 00:00:00"), result.time)
+    }
+
+    private class DataWithLocalDateTime {
         var haha: String? = null
         var time: LocalDateTime? = null
+    }
+
+    private class DataWithDate {
+        var haha: String? = null
+        var time: Date? = null
     }
 }
