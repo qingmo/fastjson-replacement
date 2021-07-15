@@ -5,46 +5,35 @@ import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.JavaType
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import io.github.qingmo.json.exception.JSONException
-import java.text.SimpleDateFormat
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer
-
-import java.time.LocalTime
-
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer
-
-import java.time.format.DateTimeFormatter
-
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer
-
 import java.time.LocalDate
-
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer
-
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer
-
 import java.time.LocalDateTime
-
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer
-
-
-
+import java.time.LocalTime
+import java.time.format.DateTimeFormatter
+import java.util.Date
 
 
 object JSON {
 
-    private val STANDARD_PATTERN = "yyyy-MM-dd HH:mm:ss"
-    private val DATE_PATTERN = "yyyy-MM-dd"
-    private val TIME_PATTERN = "HH:mm:ss"
+    val STANDARD_PATTERN = "yyyy-MM-dd HH:mm:ss"
+    val DATE_PATTERN = "yyyy-MM-dd"
+    val TIME_PATTERN = "HH:mm:ss"
 
     private val objectMapper = jacksonObjectMapper()
 
     init {
         objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL)
         objectMapper.enable(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_AS_NULL)
-        objectMapper.setDateFormat(SimpleDateFormat(STANDARD_PATTERN))
+
+//        objectMapper.setDateFormat(SimpleDateFormat(STANDARD_PATTERN))
 
         // 初始化JavaTimeModule
         val javaTimeModule = JavaTimeModule()
@@ -61,6 +50,9 @@ object JSON {
         val timeFormatter = DateTimeFormatter.ofPattern(TIME_PATTERN)
         javaTimeModule.addSerializer(LocalTime::class.java, LocalTimeSerializer(timeFormatter))
         javaTimeModule.addDeserializer(LocalTime::class.java, LocalTimeDeserializer(timeFormatter))
+
+        javaTimeModule.addSerializer(Date::class.java, DateSerializer())
+        javaTimeModule.addDeserializer(Date::class.java, MultiDateDeserializer())
 
         //注册时间模块, 支持支持jsr310, 即新的时间类(java.time包下的时间类)
         objectMapper.registerModule(javaTimeModule)

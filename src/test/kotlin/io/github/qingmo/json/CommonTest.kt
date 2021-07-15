@@ -5,7 +5,6 @@ import io.github.qingmo.json.JSON.toJSONString
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import java.io.Serializable
-import java.lang.Exception
 
 
 class CommonTest {

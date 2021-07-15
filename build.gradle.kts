@@ -3,6 +3,8 @@ plugins {
     val kotlinVersion = "1.5.10"
     java
     kotlin("jvm") version "$kotlinVersion"
+    `java-library`
+    `maven-publish`
 }
 
 group = "io.github.qingmo"
@@ -49,3 +51,21 @@ tasks.withType<Test> {
         events("passed", "failed", "skipped")
     }
 }
+
+//publishing {
+//    publications {
+//        create<MavenPublication>("library") {
+//            from(components["java"])
+//
+//            artifact(tasks["sourcesJar"])
+//            artifact(tasks["javadocJar"])
+//
+//            pom {
+//                name.set("fastjson-replacement")
+//                packaging = "jar"
+//                description.set("Fastjson-replacement is a Bridge Pattern to change  Fastjson implementation to Jackson implementation.")
+//
+//            }
+//        }
+//    }
+//}

@@ -1,5 +1,13 @@
 [中文文档](./README_CN.md) | [English Document](./README.md)
 
+## What's `Fastjson-replacement`?         
+`Fastjson-replacement` is a Bridge Pattern for developers or lagency projects which are used to `Fastjson` usage to change  
+`Fastjson` implementation to `Jackson` implementation.
+
+## Features       
+* support `java.util.Date`, `java 8 jsr310 time packages`(`LocalDate`,`LocalDateTime`,`LocalTime`)
+* support multiple Date Format Deserialize（Current:`yyyy-MM-dd HH:mm:ss`,`yyyy-MM-dd`)
+
 ## Why
 
 Why do we need replace `fastjson`? For it security issues, late of fix period and so on.

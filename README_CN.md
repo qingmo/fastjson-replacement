@@ -1,6 +1,13 @@
 [中文文档](./README_CN.md) | [English Document](./README.md)
 
-## 背景
+## `Fastjson-replacement`是什么    
+`Fastjson-replacement` 是一个用于替换`Fastjson`实现替换为`Jackson`实现的桥接模式工具，这让习惯于`Fastjson`用法的开发者或者已经大批量使用`Fastjson`的遗留工程代码可以轻松的做出改变，而无需改变现有的使用习惯与人体工程学体验。
+
+## 特性
+* 支持`java.util.Date`, `java 8 jsr310 time packages`(`LocalDate`,`LocalDateTime`,`LocalTime`)        
+* 支持多种时间格式反序列化（目前：`yyyy-MM-dd HH:mm:ss`,`yyyy-MM-dd`)
+
+## 开发原因
 
 为什么要替换`fastjson`? 因为其漏洞多，修复速度慢。为什么重造轮子？测试完备度不够，没有自动发布和及时更新版本。
 
