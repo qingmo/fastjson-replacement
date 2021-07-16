@@ -90,7 +90,6 @@ internal class MultiDateDeserializerTest {
         assertEquals(2004, calendar.get(Calendar.YEAR))
         assertEquals(Calendar.MAY, calendar.get(Calendar.MONTH))
         assertEquals(3, calendar.get(Calendar.DAY_OF_MONTH))
-        assertEquals(17, calendar.get(Calendar.HOUR_OF_DAY))
 
         data = """
             {"haha":"20040605T183008"}
