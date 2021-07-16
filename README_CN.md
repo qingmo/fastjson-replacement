@@ -1,4 +1,7 @@
-[中文文档](./README_CN.md) | [English Document](./README.md)
+[中文文档](./README_CN.md) | [English Document](./README.md)        
+
+# Fastjson-replacement
+[![codecov](https://codecov.io/gh/qingmo/fastjson-replacement/branch/main/graph/badge.svg?token=OZQG1NVXDX)](https://codecov.io/gh/qingmo/fastjson-replacement)
 
 ## `Fastjson-replacement`是什么    
 `Fastjson-replacement` 是一个用于替换`Fastjson`实现替换为`Jackson`实现的桥接模式工具，这让习惯于`Fastjson`用法的开发者或者已经大批量使用`Fastjson`的遗留工程代码可以轻松的做出改变，而无需改变现有的使用习惯与人体工程学体验。
