@@ -65,7 +65,11 @@ class JSONArray : MutableList<Any?> {
 
     fun getBooleanValue(index: Int): Boolean {
         val value = get(index)
-        return TypeUtils.castToBoolean(value) ?: false
+        try {
+            return TypeUtils.castToBoolean(value)!!
+        } catch (ignore: Exception) {
+            return false
+        }
     }
 
     fun <T> toJavaList(clazz: Class<T>?): List<T> {
@@ -79,7 +83,11 @@ class JSONArray : MutableList<Any?> {
 
     fun getByteValue(index: Int): Byte {
         val value = get(index)
-        return TypeUtils.castToByte(value) ?: return 0
+        try {
+            return TypeUtils.castToByte(value)!!
+        } catch (ignore: Exception) {
+            return 0
+        }
     }
 
     fun getShort(index: Int): Short? {
@@ -89,7 +97,11 @@ class JSONArray : MutableList<Any?> {
 
     fun getShortValue(index: Int): Short {
         val value = get(index)
-        return TypeUtils.castToShort(value) ?: return 0
+        try {
+            return TypeUtils.castToShort(value)!!
+        } catch (ignore: Exception) {
+            return 0
+        }
     }
 
     fun getInteger(index: Int): Int? {
@@ -99,7 +111,11 @@ class JSONArray : MutableList<Any?> {
 
     fun getIntValue(index: Int): Int {
         val value = get(index)
-        return TypeUtils.castToInt(value) ?: return 0
+        try {
+            return TypeUtils.castToInt(value)!!
+        } catch (ignore: Exception) {
+            return 0
+        }
     }
 
     fun getLong(index: Int): Long? {
@@ -109,7 +125,11 @@ class JSONArray : MutableList<Any?> {
 
     fun getLongValue(index: Int): Long {
         val value = get(index)
-        return TypeUtils.castToLong(value) ?: return 0L
+        try {
+            return TypeUtils.castToLong(value)!!
+        } catch (ignore: Exception) {
+            return 0L
+        }
     }
 
     fun getFloat(index: Int): Float? {
@@ -119,7 +139,11 @@ class JSONArray : MutableList<Any?> {
 
     fun getFloatValue(index: Int): Float {
         val value = get(index)
-        return TypeUtils.castToFloat(value) ?: return 0f
+        try {
+            return TypeUtils.castToFloat(value)!!
+        } catch (ignore: Exception) {
+            return 0f
+        }
     }
 
     fun getDouble(index: Int): Double? {
@@ -129,7 +153,11 @@ class JSONArray : MutableList<Any?> {
 
     fun getDoubleValue(index: Int): Double {
         val value = get(index)
-        return TypeUtils.castToDouble(value) ?: return 0.0
+        try {
+            return TypeUtils.castToDouble(value)!!
+        } catch (ignore: Exception) {
+            return 0.0
+        }
     }
 
     fun getBigDecimal(index: Int): BigDecimal? {

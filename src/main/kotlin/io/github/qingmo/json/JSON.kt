@@ -19,6 +19,7 @@ import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.JavaType
 import com.fasterxml.jackson.databind.JsonNode
+import com.fasterxml.jackson.databind.ser.std.DateSerializer
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer
@@ -29,6 +30,7 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import io.github.qingmo.json.exception.JSONException
+import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
@@ -63,7 +65,7 @@ object JSON {
         javaTimeModule.addSerializer(LocalTime::class.java, LocalTimeSerializer(timeFormatter))
         javaTimeModule.addDeserializer(LocalTime::class.java, LocalTimeDeserializer(timeFormatter))
 
-        javaTimeModule.addSerializer(Date::class.java, DateSerializer())
+        javaTimeModule.addSerializer(Date::class.java, DateSerializer(false, SimpleDateFormat(STANDARD_PATTERN)))
         javaTimeModule.addDeserializer(Date::class.java, MultiDateDeserializer())
 
         //注册时间模块, 支持支持jsr310, 即新的时间类(java.time包下的时间类)
@@ -93,8 +95,7 @@ object JSON {
 
     fun parseObject(jsonString: String?): JSONObject {
         try {
-            val result: JSONObject = objectMapper.readValue(jsonString!!)
-            return result
+            return objectMapper.readValue(jsonString!!)
         } catch (e: Exception) {
             throw JSONException(e)
         }
@@ -143,9 +144,11 @@ object JSON {
      * @return 是否为JSON字符串
      */
     fun isJsonObj(str: String?): Boolean {
-        return if (isBlank(str)) {
+        return if (str.isNullOrBlank()) {
             false
-        } else isWrap(str!!.trim { it <= ' ' }, '{', '}')
+        } else {
+            str.trim().startsWith('{') && str.trim().endsWith('}')
+        }
     }
 
     /**
@@ -155,18 +158,11 @@ object JSON {
      * @return 是否为JSON字符串
      */
     fun isJsonArray(str: String?): Boolean {
-        return if (isBlank(str)) {
+        return if (str.isNullOrBlank()) {
             false
-        } else isWrap(str!!.trim { it <= ' ' }, '[', ']')
+        } else {
+            str.trim().startsWith('[') && str.trim().endsWith(']')
+        }
     }
 
-    private fun isBlank(str: String?): Boolean {
-        return str == null || str.isBlank()
-    }
-
-    private fun isWrap(str: String, start: Char, end: Char): Boolean {
-        return if (isBlank(str)) {
-            false
-        } else str[0] == start && str[str.length - 1] == end
-    }
 }

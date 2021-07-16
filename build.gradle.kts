@@ -18,6 +18,7 @@ plugins {
     `maven-publish`
     id("com.github.hierynomus.license") version "0.15.0"
     `signing`
+    `jacoco`
 }
 
 group = "io.github.qingmo"
@@ -37,10 +38,23 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
+    implementation("joda-time:joda-time:2.10.10")
+
 
 }
 
 tasks {
+    jacocoTestReport {
+        dependsOn("test")
+        reports {
+            xml.required.set(true)
+            xml.isEnabled = true
+            xml.destination = file("${buildDir}/reports/jacoco/report.xml")
+            html.isEnabled = false
+            csv.isEnabled = false
+        }
+    }
+
     withType<Wrapper> {
         gradleVersion = "6.8.3"
         distributionType = Wrapper.DistributionType.BIN
@@ -64,6 +78,7 @@ tasks {
             showStandardStreams = true
             events("passed", "failed", "skipped")
         }
+        finalizedBy("jacocoTestReport")
     }
 
     withType<Jar> {
@@ -103,6 +118,11 @@ tasks {
 java {
     withSourcesJar()
     withJavadocJar()
+}
+
+jacoco {
+    toolVersion = "0.8.7"
+    reportsDirectory.set(layout.buildDirectory.dir("${buildDir}/reports/jacoco/"))
 }
 
 license {

@@ -55,7 +55,7 @@ class JSONObject : MutableMap<Any, Any?> {
         return JSON.parseArray(JSON.toJSONString(value))
     }
 
-    
+
     fun <T> getObject(key: String, clazz: Class<T>): T? {
         val obj = map[key] ?: return null
         return parseObject(JSON.toJSONString(obj), clazz)
@@ -68,8 +68,11 @@ class JSONObject : MutableMap<Any, Any?> {
 
     fun getBooleanValue(key: String): Boolean {
         val value = get(key)
-        val booleanVal: Boolean = TypeUtils.castToBoolean(value) ?: return false
-        return booleanVal
+        try {
+            return TypeUtils.castToBoolean(value)!!
+        } catch (ignore: Exception) {
+            return false
+        }
     }
 
     fun getByte(key: String): Byte? {
@@ -79,7 +82,11 @@ class JSONObject : MutableMap<Any, Any?> {
 
     fun getByteValue(key: String): Byte {
         val value = get(key)
-        return TypeUtils.castToByte(value) ?: return 0
+        try {
+            return TypeUtils.castToByte(value)!!
+        } catch (ignore: Exception) {
+            return 0
+        }
     }
 
     fun getShort(key: String): Short? {
@@ -89,7 +96,11 @@ class JSONObject : MutableMap<Any, Any?> {
 
     fun getShortValue(key: String): Short {
         val value = get(key)
-        return TypeUtils.castToShort(value) ?: return 0
+        try {
+            return TypeUtils.castToShort(value)!!
+        } catch (ignore: Exception) {
+            return 0
+        }
     }
 
     fun getInteger(key: String): Int? {
@@ -99,7 +110,11 @@ class JSONObject : MutableMap<Any, Any?> {
 
     fun getIntValue(key: String): Int {
         val value = get(key)
-        return TypeUtils.castToInt(value) ?: return 0
+        try {
+            return TypeUtils.castToInt(value)!!
+        } catch (ignore: Exception) {
+            return 0
+        }
     }
 
     fun getLong(key: String): Long? {
@@ -109,7 +124,11 @@ class JSONObject : MutableMap<Any, Any?> {
 
     fun getLongValue(key: String): Long {
         val value = get(key)
-        return TypeUtils.castToLong(value) ?: return 0L
+        try {
+            return TypeUtils.castToLong(value)!!
+        } catch (ignore: Exception) {
+            return 0L
+        }
     }
 
     fun getFloat(key: String): Float? {
@@ -119,7 +138,11 @@ class JSONObject : MutableMap<Any, Any?> {
 
     fun getFloatValue(key: String): Float {
         val value = get(key)
-        return TypeUtils.castToFloat(value) ?: return 0f
+        try {
+            return TypeUtils.castToFloat(value)!!
+        } catch (ignore: Exception) {
+            return 0f
+        }
     }
 
     fun getDouble(key: String): Double? {
@@ -129,7 +152,11 @@ class JSONObject : MutableMap<Any, Any?> {
 
     fun getDoubleValue(key: String): Double {
         val value = get(key)
-        return TypeUtils.castToDouble(value) ?: return 0.0
+        try {
+            return TypeUtils.castToDouble(value)!!
+        } catch (ignore: Exception) {
+            return 0.0
+        }
     }
 
     fun getBigDecimal(key: String): BigDecimal? {
@@ -148,7 +175,7 @@ class JSONObject : MutableMap<Any, Any?> {
     }
 
     fun <T> toJavaObject(clazz: Class<T>): T {
-        return if (clazz == MutableMap::class.java || clazz == JSONObject::class.java || clazz == JSONArray::class.java) {
+        return if (clazz == MutableMap::class.java || clazz == JSONObject::class.java) {
             @Suppress("UNCHECKED_CAST")
             this as T
         } else parseObject(toJSONString(), clazz)

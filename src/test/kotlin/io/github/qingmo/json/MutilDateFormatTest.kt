@@ -54,8 +54,6 @@ class MutilDateFormatTest {
 
     @Test
     fun `test java Date serializer with null value`() {
-
-
         val data = DataWithDate()
         data.haha = "共产党100周年快乐"
         data.time = null
@@ -63,7 +61,21 @@ class MutilDateFormatTest {
         assertNotNull(result)
         //language=JSON
         assertEquals("{\"haha\":\"共产党100周年快乐\"}", result)
+    }
 
+    @Test
+    fun `test java Date deserializer with blank date value`() {
+        @Language("JSON") val data = """{
+          "haha": "共产党100周年快乐",
+          "time": ""
+        }"""
+        assertFailsWith(
+            exceptionClass = JSONException::class,
+            message = "Unparseable date with empty value.",
+            block = {
+                JSON.parseObject(data, DataWithDate::class.java)
+            }
+        )
     }
 
     @Test
@@ -77,7 +89,6 @@ class MutilDateFormatTest {
         val parseRet = JSON.parseObject(data, DataWithDate::class.java)
         assertNotNull(parseRet)
         assertTrue(expectDate.equals(parseRet.time))
-
     }
 
     @Test

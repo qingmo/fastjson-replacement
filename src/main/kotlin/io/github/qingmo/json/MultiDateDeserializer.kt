@@ -20,17 +20,22 @@ import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer
+import org.joda.time.format.ISODateTimeFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Date
 
 class MultiDateDeserializer(vc: Class<*>?) : StdDeserializer<Date>(vc) {
 
+
     companion object {
+        private const val ISO8601DateTimeBasicFormat = "yyyyMMdd'T'HHmmss"
+
         // the sequence must change carefully, the best match must be the first one
         private val DATE_FORMATS: List<String> = listOf(
             JSON.STANDARD_PATTERN,
-            JSON.DATE_PATTERN
+            JSON.DATE_PATTERN,
+            ISO8601DateTimeBasicFormat
         )
     }
 
@@ -45,11 +50,11 @@ class MultiDateDeserializer(vc: Class<*>?) : StdDeserializer<Date>(vc) {
                 "Unparseable date with empty value."
             )
         }
-        val longVal: Long
-        val dateLexer = JSONScanner(dateStr)
-        if (dateLexer.scanISO8601DateIfMatch()) {
-            longVal = dateLexer.getCurrentCalendar()!!.timeInMillis
-            return Date(longVal)
+        try {
+            val parseDateTime = ISODateTimeFormat.dateTimeParser().parseDateTime(dateStr)
+            return parseDateTime.toDate()
+        } catch (ignore: Exception) {
+
         }
         for (DATE_FORMAT in DATE_FORMATS) {
             try {

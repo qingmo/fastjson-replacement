@@ -17,7 +17,6 @@ package io.github.qingmo.json
 
 import io.github.qingmo.json.exception.JSONException
 import java.math.BigDecimal
-
 import java.math.BigInteger
 import java.util.regex.Matcher
 import java.util.regex.Pattern
@@ -41,7 +40,7 @@ object TypeUtils {
         if (value is String) {
             val strVal = value
             return if (strVal.length == 0 //
-                || "null" == strVal || "NULL" == strVal
+                || "null".equals(strVal, ignoreCase = true)
             ) {
                 null
             } else strVal.toByte()
@@ -85,7 +84,7 @@ object TypeUtils {
         if (value is String) {
             val strVal = value
             return if (strVal.length == 0 //
-                || "null" == strVal || "NULL" == strVal
+                || "null".equals(strVal, ignoreCase = true)
             ) {
                 null
             } else strVal.toShort()
@@ -116,8 +115,8 @@ object TypeUtils {
             return null
         }
         val strVal = value.toString()
-        if (strVal.length == 0
-            || strVal.equals("null", ignoreCase = true)
+        if (strVal.isEmpty()
+            || "null".equals(strVal, ignoreCase = true)
         ) {
             return null
         }
@@ -144,14 +143,11 @@ object TypeUtils {
         } else if (value is BigInteger) {
             return value
         } else if (value is BigDecimal) {
-            val scale = value.scale()
-            if (scale > -1000 && scale < 1000) {
-                return value.toBigInteger()
-            }
+            return value.toBigInteger()
         }
         val strVal = value.toString()
-        if (strVal.length == 0
-            || strVal.equals("null", ignoreCase = true)
+        if (strVal.isEmpty()
+            || "null".equals(strVal, ignoreCase = true)
         ) {
             return null
         }
@@ -171,7 +167,7 @@ object TypeUtils {
         if (value is String) {
             var strVal = value.toString()
             if (strVal.length == 0 //
-                || "null" == strVal || "NULL" == strVal
+                || "null".equals(strVal, ignoreCase = true)
             ) {
                 return null
             }
@@ -196,7 +192,7 @@ object TypeUtils {
         if (value is String) {
             var strVal = value.toString()
             if (strVal.length == 0 //
-                || "null" == strVal || "NULL" == strVal
+                || "null".equals(strVal, ignoreCase = true)
             ) {
                 return null
             }
@@ -209,48 +205,6 @@ object TypeUtils {
             return if (value) 1.0 else 0.0
         }
         throw JSONException("can not cast to double, value : $value")
-    }
-
-    fun longExtractValue(number: Number): Long {
-        return if (number is BigDecimal) {
-            number.longValueExact()
-        } else number.toLong()
-    }
-
-    fun num(c0: Char, c1: Char): Int {
-        return if (c0 >= '0' && c0 <= '9' && c1 >= '0' && c1 <= '9'
-        ) {
-            ((c0 - '0') * 10
-                    + (c1 - '0'))
-        } else -1
-    }
-
-    fun num(c0: Char, c1: Char, c2: Char, c3: Char): Int {
-        return if (c0 >= '0' && c0 <= '9' && c1 >= '0' && c1 <= '9' && c2 >= '0' && c2 <= '9' && c3 >= '0' && c3 <= '9'
-        ) {
-            (c0 - '0') * 1000 + (c1 - '0') * 100 + (c2 - '0') * 10 + (c3 - '0')
-        } else -1
-    }
-
-    fun num(c0: Char, c1: Char, c2: Char, c3: Char, c4: Char, c5: Char, c6: Char, c7: Char, c8: Char): Int {
-        return if (c0 >= '0' && c0 <= '9' && c1 >= '0' && c1 <= '9' && c2 >= '0' && c2 <= '9' && c3 >= '0' && c3 <= '9' && c4 >= '0' && c4 <= '9' && c5 >= '0' && c5 <= '9' && c6 >= '0' && c6 <= '9' && c7 >= '0' && c7 <= '9' && c8 >= '0' && c8 <= '9'
-        ) {
-            (c0 - '0') * 100000000 + (c1 - '0') * 10000000 + (c2 - '0') * 1000000 + (c3 - '0') * 100000 + (c4 - '0') * 10000 + (c5 - '0') * 1000 + (c6 - '0') * 100 + (c7 - '0') * 10 + (c8 - '0')
-        } else -1
-    }
-
-    fun isNumber(str: String): Boolean {
-        for (i in 0 until str.length) {
-            val ch = str[i]
-            if (ch == '+' || ch == '-') {
-                if (i != 0) {
-                    return false
-                }
-            } else if (ch < '0' || ch > '9') {
-                return false
-            }
-        }
-        return true
     }
 
     fun castToLong(value: Any?): Long? {
@@ -266,7 +220,7 @@ object TypeUtils {
         if (value is String) {
             var strVal = value
             if (strVal.length == 0 //
-                || "null" == strVal || "NULL" == strVal
+                || "null".equals(strVal, ignoreCase = true)
             ) {
                 return null
             }
@@ -279,17 +233,6 @@ object TypeUtils {
                 throw ex
             }
         }
-        if (value is Map<*, *>) {
-            val map = value
-            if (map.size == 2 && map.containsKey("andIncrement")
-                && map.containsKey("andDecrement")
-            ) {
-                val iter = map.values.iterator()
-                iter.next()
-                val value2 = iter.next()!!
-                return castToLong(value2)
-            }
-        }
         if (value is Boolean) {
             return if (value) 1L else 0L
         }
@@ -300,40 +243,28 @@ object TypeUtils {
         if (decimal == null) {
             return 0
         }
-        val scale = decimal.scale()
-        return if (scale >= -100 && scale <= 100) {
-            decimal.toByte()
-        } else decimal.byteValueExact()
+        return decimal.toBigInteger().toBigDecimal().byteValueExact()
     }
 
     fun shortValue(decimal: BigDecimal?): Short {
         if (decimal == null) {
             return 0
         }
-        val scale = decimal.scale()
-        return if (scale >= -100 && scale <= 100) {
-            decimal.toShort()
-        } else decimal.shortValueExact()
+        return decimal.toBigInteger().toBigDecimal().shortValueExact()
     }
 
     fun intValue(decimal: BigDecimal?): Int {
         if (decimal == null) {
             return 0
         }
-        val scale = decimal.scale()
-        return if (scale >= -100 && scale <= 100) {
-            decimal.toInt()
-        } else decimal.intValueExact()
+        return decimal.toBigInteger().toBigDecimal().intValueExact()
     }
 
     fun longValue(decimal: BigDecimal?): Long {
         if (decimal == null) {
             return 0
         }
-        val scale = decimal.scale()
-        return if (scale >= -100 && scale <= 100) {
-            decimal.toLong()
-        } else decimal.longValueExact()
+        return decimal.toBigInteger().toBigDecimal().longValueExact()
     }
 
     fun castToInt(value: Any?): Int? {
@@ -352,7 +283,7 @@ object TypeUtils {
         if (value is String) {
             var strVal = value
             if (strVal.length == 0 //
-                || "null" == strVal || "NULL" == strVal
+                || "null".equals(strVal, ignoreCase = true)
             ) {
                 return null
             }
@@ -368,17 +299,7 @@ object TypeUtils {
         if (value is Boolean) {
             return if (value) 1 else 0
         }
-        if (value is Map<*, *>) {
-            val map = value
-            if (map.size == 2 && map.containsKey("andIncrement")
-                && map.containsKey("andDecrement")
-            ) {
-                val iter = map.values.iterator()
-                iter.next()
-                val value2 = iter.next()!!
-                return castToInt(value2)
-            }
-        }
+
         throw JSONException("can not cast to int, value : $value")
     }
 
@@ -398,7 +319,7 @@ object TypeUtils {
         if (value is String) {
             val strVal = value
             if (strVal.length == 0 //
-                || "null" == strVal || "NULL" == strVal
+                || "null".equals(strVal, ignoreCase = true)
             ) {
                 return null
             }

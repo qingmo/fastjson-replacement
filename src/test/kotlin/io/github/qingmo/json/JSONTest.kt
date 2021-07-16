@@ -18,11 +18,16 @@ package io.github.qingmo.json
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.annotation.JsonUnwrapped
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
+import com.fasterxml.jackson.databind.node.IntNode
+import com.fasterxml.jackson.databind.node.NullNode
+import io.github.qingmo.json.exception.JSONException
 import org.junit.jupiter.api.Test
+import java.time.LocalTime
 import java.util.Calendar
 import java.util.Date
 import java.util.TimeZone
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
@@ -30,6 +35,90 @@ import kotlin.test.assertTrue
 
 
 class JSONTest {
+
+    @Test
+    fun `test toJSONString with invalid argument`() {
+
+        assertFailsWith(
+            exceptionClass = JSONException::class,
+            message = "null",
+            block = {
+                JSON.toJSONString(mapOf(null to "123"))
+            }
+        )
+        assertEquals("null", JSON.toJSONString(null))
+    }
+
+    @Test
+    fun `test parse with different argument`() {
+
+        assertTrue(JSON.parse("""{}""") is JSONObject)
+        assertTrue(JSON.parse("""[]""") is JSONArray)
+        assertFailsWith(
+            exceptionClass = JSONException::class,
+            message = "Unrecognized token",
+            block = {
+                JSON.parse("""haha""")
+            }
+        )
+
+        assertTrue(JSON.parse("""null""") is NullNode)
+        assertEquals(IntNode(1), JSON.parse("""1"""))
+    }
+
+    @Test
+    fun `test parseObject with invalid argument`() {
+        assertFailsWith(
+            exceptionClass = JSONException::class,
+            message = "Unrecognized token",
+            block = {
+                JSON.parseObject("""haha""")
+            }
+        )
+    }
+
+    @Test
+    fun `test parseArray with invalid argument`() {
+        assertFailsWith(
+            exceptionClass = JSONException::class,
+            message = "Unrecognized token",
+            block = {
+                JSON.parseArray("""haha""")
+            }
+        )
+        assertFailsWith(
+            exceptionClass = JSONException::class,
+            message = "Cannot deserialize value of type",
+            block = {
+                JSON.parseArray("""["haha","heihei"]""", Int::class.java)
+            }
+        )
+    }
+
+    @Test
+    fun `test isJson`() {
+        assertTrue(JSON.isJson("""{}"""))
+        assertTrue(JSON.isJson("""[]"""))
+        assertFalse(JSON.isJson("""haha"""))
+        assertFalse(JSON.isJson("""{haha"""))
+        assertFalse(JSON.isJson("""[haha"""))
+        assertFalse(JSON.isJson(null))
+    }
+
+    @Test
+    fun `test isJsonObj`() {
+        assertTrue(JSON.isJsonObj("""{}"""))
+        assertFalse(JSON.isJsonObj("""     """))
+        assertFalse(JSON.isJsonObj("""   1  """))
+    }
+
+    @Test
+    fun `test isJsonArray`() {
+        assertTrue(JSON.isJsonArray("""[]"""))
+        assertFalse(JSON.isJsonArray("""     """))
+        assertFalse(JSON.isJsonArray("""   1  """))
+        assertFalse(JSON.isJsonArray("""  \t 1 \t """))
+    }
 
     @Test
     fun `test ReadObject`() {
@@ -138,6 +227,21 @@ class JSONTest {
         assertEquals("{\"name\":\"abc\",\"age\":123}", JSON.toJSONString(unwrappedIsTrueBean))
     }
 
+    @Test
+    fun `test LocalTime`() {
+       val data = """{"haha":"12:11:01"}"""
+        val ret = JSON.parseObject(data, LocalTimeTest::class.java)
+        assertNotNull(ret)
+        assertEquals(12, ret.haha.hour)
+        assertEquals(11, ret.haha.minute)
+        assertEquals(1, ret.haha.second)
+        val test = LocalTimeTest(LocalTime.of(ret.haha.hour, ret.haha.minute, 2, 0))
+        val teststr = JSON.toJSONString(test)
+        assertEquals("""{"haha":"12:11:02"}""", teststr)
+
+    }
+
+    data class LocalTimeTest(val haha: LocalTime)
     @JsonDeserialize
     class UnwrappedIsFalseBean {
 

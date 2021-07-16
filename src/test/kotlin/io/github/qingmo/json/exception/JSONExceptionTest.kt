@@ -13,11 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.github.qingmo.json
+package io.github.qingmo.json.exception
 
-interface JSONLexer {
-    companion object {
-        const val EOI = 0x1A.toChar()
-        const val LITERAL_ISO8601_DATE = 5
+import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Test
+
+internal class JSONExceptionTest {
+
+    @Test
+    fun `add converage of test code`() {
+        val first = JSONException("haha")
+        assertEquals("haha", first.message)
+        assertNull(first.cause)
+        val second = JSONException("hoho", IllegalArgumentException("gaga"))
+        assertEquals("hoho", second.message)
+        assertNotNull(second.cause)
+        assertEquals("gaga", second.cause?.message)
     }
 }
