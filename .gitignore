@@ -1,4 +1,5 @@
 # Created by .ignore support plugin (hsz.mobi)
+!gradle-wrapper.jar
 ### Linux template
 *~
 
@@ -222,3 +223,4 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+!gradle-wrapper.jar
