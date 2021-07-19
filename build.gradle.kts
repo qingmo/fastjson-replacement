@@ -10,6 +10,7 @@ val signingKeyId: String? by project
 val signingPassword: String? by project
 ext["signing.keyId"] = signingKeyId ?: "foo"
 ext["signing.password"] = signingPassword ?: "bar"
+
 plugins {
     val kotlinVersion = "1.5.10"
     java
@@ -22,7 +23,7 @@ plugins {
 }
 
 group = "io.github.qingmo"
-version = "1.0"
+version = "1.0.1"
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 repositories {
@@ -182,8 +183,8 @@ publishing {
 
                 licenses {
                     license {
-                        name.set("The Apache License, Version 2.0")
-                        url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+                        name.set("MIT License")
+                        url.set("https://mit-license.org/")
                     }
                 }
 
