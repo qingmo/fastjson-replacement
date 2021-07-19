@@ -1,6 +1,7 @@
 [中文文档](./README_CN.md) | [English Document](./README.md)
 # Fastjson-replacement         
-[![codecov](https://codecov.io/gh/qingmo/fastjson-replacement/branch/main/graph/badge.svg?token=OZQG1NVXDX)](https://codecov.io/gh/qingmo/fastjson-replacement)
+[![codecov](https://codecov.io/gh/qingmo/fastjson-replacement/branch/main/graph/badge.svg?token=OZQG1NVXDX)](https://codecov.io/gh/qingmo/fastjson-replacement) [![Test](https://img.shields.io/sonar/test_success_density/qingmo_fastjson-replacement?server=https%3A%2F%2Fsonarcloud.io)]
+
 ## What's `Fastjson-replacement`?         
 `Fastjson-replacement` is a Bridge Pattern for developers or lagency projects which are used to `Fastjson` usage to replace  
 `Fastjson` implementation with `Jackson` implementation.
