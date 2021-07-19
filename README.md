@@ -1,6 +1,7 @@
 [中文文档](./README_CN.md) | [English Document](./README.md)
-# Fastjson-replacement         
-[![codecov](https://codecov.io/gh/qingmo/fastjson-replacement/branch/main/graph/badge.svg?token=OZQG1NVXDX)](https://codecov.io/gh/qingmo/fastjson-replacement) [![Test](https://img.shields.io/sonar/test_success_density/qingmo_fastjson-replacement?server=https%3A%2F%2Fsonarcloud.io)]
+
+# Fastjson-replacement
+[![codecov](https://codecov.io/gh/qingmo/fastjson-replacement/branch/main/graph/badge.svg?token=OZQG1NVXDX)](https://codecov.io/gh/qingmo/fastjson-replacement) [![License](https://img.shields.io/badge/License-MIT-brightgreen)](https://mit-license.org/) [![quality gate](https://sonarcloud.io/api/project_badges/measure?project=qingmo_fastjson-replacement&metric=alert_status)](https://sonarcloud.io/dashboard?id=qingmo_fastjson-replacement) [![Codacy Security Scan](https://github.com/qingmo/fastjson-replacement/actions/workflows/codacy-analysis.yml/badge.svg)](https://github.com/qingmo/fastjson-replacement/actions/workflows/codacy-analysis.yml)
 
 ## What's `Fastjson-replacement`?         
 `Fastjson-replacement` is a Bridge Pattern for developers or lagency projects which are used to `Fastjson` usage to replace  
