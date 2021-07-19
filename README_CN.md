@@ -3,7 +3,7 @@
 # Fastjson-replacement
 [![codecov](https://codecov.io/gh/qingmo/fastjson-replacement/branch/main/graph/badge.svg?token=OZQG1NVXDX)](https://codecov.io/gh/qingmo/fastjson-replacement) [![License](https://img.shields.io/badge/License-MIT-brightgreen)](https://mit-license.org/) [![quality gate](https://sonarcloud.io/api/project_badges/measure?project=qingmo_fastjson-replacement&metric=alert_status)](https://sonarcloud.io/dashboard?id=qingmo_fastjson-replacement) [![Codacy Security Scan](https://github.com/qingmo/fastjson-replacement/actions/workflows/codacy-analysis.yml/badge.svg)](https://github.com/qingmo/fastjson-replacement/actions/workflows/codacy-analysis.yml)
 
-## `Fastjson-replacement`是什么    
+## `Fastjson-replacement`是什么
 `Fastjson-replacement` 是一个用于替换`Fastjson`实现替换为`Jackson`实现的桥接模式工具，这让习惯于`Fastjson`用法的开发者或者已经大批量使用`Fastjson`的遗留工程代码可以轻松的做出改变，而无需改变现有的使用习惯与人体工程学体验。
 
 ## 特性
@@ -101,3 +101,4 @@ import io.github.qingmo.json.JSONObject
 [Jackson替换fastjson](https://www.cnblogs.com/larva-zhh/p/11544317.html)
 
 [如何让jackson与kotlin友好相处](https://cloud.tencent.com/developer/article/1372442)
+
