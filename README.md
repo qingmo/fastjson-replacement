@@ -3,6 +3,8 @@
 # Fastjson-replacement
 [![codecov](https://codecov.io/gh/qingmo/fastjson-replacement/branch/main/graph/badge.svg?token=OZQG1NVXDX)](https://codecov.io/gh/qingmo/fastjson-replacement) [![License](https://img.shields.io/badge/License-MIT-brightgreen)](https://mit-license.org/) [![quality gate](https://sonarcloud.io/api/project_badges/measure?project=qingmo_fastjson-replacement&metric=alert_status)](https://sonarcloud.io/dashboard?id=qingmo_fastjson-replacement) [![Codacy Security Scan](https://github.com/qingmo/fastjson-replacement/actions/workflows/codacy-analysis.yml/badge.svg)](https://github.com/qingmo/fastjson-replacement/actions/workflows/codacy-analysis.yml)
 
+current version of 1.0 is not product ready, for `jackson-module-kotlin` depends on kotlin-reflect bad benchmark scores in deserialize.
+i'm waiting for https://github.com/FasterXML/jackson-module-kotlin/pull/439
 ## What's `Fastjson-replacement`?         
 `Fastjson-replacement` is a Bridge Pattern for developers or lagency projects which are used to `Fastjson` usage to replace  
 `Fastjson` implementation with `Jackson` implementation.
