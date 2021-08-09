@@ -23,7 +23,7 @@ plugins {
 }
 
 group = "io.github.qingmo"
-version = "1.0.1"
+version = "1.0.2"
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 repositories {
@@ -34,8 +34,7 @@ repositories {
 dependencies {
     val jacksonModuleVersion = "2.12.3"
     implementation(kotlin("stdlib"))
-//    implementation("com.fasterxml.jackson.core:jackson-databind:${jacksonModuleVersion}")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:${jacksonModuleVersion}")
+    implementation("com.fasterxml.jackson.core:jackson-databind:${jacksonModuleVersion}")
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jacksonModuleVersion}")
     testImplementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")

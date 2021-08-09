@@ -21,6 +21,26 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package io.github.qingmo.json
+package io.github.qingmo.json.datas;
 
-data class DataSample(val haha: String, val hoho: Int)
+import java.util.Date;
+
+public class TestDate {
+
+    public TestDate() {
+    }
+
+    public TestDate(Date haha) {
+        this.haha = haha;
+    }
+
+    private Date haha;
+
+    public Date getHaha() {
+        return haha;
+    }
+
+    public void setHaha(Date haha) {
+        this.haha = haha;
+    }
+}

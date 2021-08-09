@@ -23,6 +23,7 @@
  */
 package io.github.qingmo.json
 
+import io.github.qingmo.json.datas.TestClass
 import io.github.qingmo.json.exception.JSONException
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
@@ -195,5 +196,4 @@ internal class JSONObjectTest {
 
     }
 
-    data class TestClass(val foo: String)
 }

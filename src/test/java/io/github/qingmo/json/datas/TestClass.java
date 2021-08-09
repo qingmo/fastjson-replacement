@@ -21,19 +21,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package io.github.qingmo.json
+package io.github.qingmo.json.datas;
 
-import org.junit.jupiter.api.Test
-import kotlin.test.assertEquals
+public class TestClass {
+    public TestClass() {
+    }
 
-class DataClassSupportTest {
+    public TestClass(String foo) {
+        this.foo = foo;
+    }
 
-    @Test
-    fun `test support kotlin dataclass type`() {
-        val dataSample = DataSample("1", 2)
-        val strRet = JSON.toJSONString(dataSample)
-        val targetObj = JSON.parseObject(strRet, DataSample::class.java)
-        assertEquals(dataSample.haha, targetObj.haha)
-        assertEquals(dataSample.hoho, targetObj.hoho)
+    private String foo;
+
+    public String getFoo() {
+        return foo;
+    }
+
+    public void setFoo(String foo) {
+        this.foo = foo;
     }
 }

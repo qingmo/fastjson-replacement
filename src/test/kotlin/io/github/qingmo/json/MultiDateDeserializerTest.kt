@@ -26,11 +26,10 @@ package io.github.qingmo.json
 import com.fasterxml.jackson.core.JsonParseException
 import com.fasterxml.jackson.core.io.IOContext
 import com.fasterxml.jackson.core.json.UTF8DataInputJsonParser
-import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.databind.ObjectReader
 import com.fasterxml.jackson.databind.node.NullNode
 import com.fasterxml.jackson.databind.node.TextNode
+import io.github.qingmo.json.datas.TestDate
 import io.github.qingmo.json.exception.JSONException
 import io.github.qingmo.json.internal.MultiDateDeserializer
 import org.junit.jupiter.api.Test
@@ -150,6 +149,4 @@ internal class MultiDateDeserializerTest {
         assertEquals(5, calendar.get(Calendar.DAY_OF_MONTH))
         assertEquals(18, calendar.get(Calendar.HOUR_OF_DAY))
     }
-
-    data class TestDate(val haha: Date)
 }

@@ -249,16 +249,14 @@ class JSONTest {
         val data = """{"haha":"12:11:01"}"""
         val ret = JSON.parseObject(data, LocalTimeTest::class.java)
         assertNotNull(ret)
-        assertEquals(12, ret.haha.hour)
-        assertEquals(11, ret.haha.minute)
-        assertEquals(1, ret.haha.second)
-        val test = LocalTimeTest(LocalTime.of(ret.haha.hour, ret.haha.minute, 2, 0))
+        assertEquals(12, ret.haha!!.hour)
+        assertEquals(11, ret.haha!!.minute)
+        assertEquals(1, ret.haha!!.second)
+        val test = LocalTimeTest(LocalTime.of(ret.haha!!.hour, ret.haha!!.minute, 2, 0))
         val teststr = JSON.toJSONString(test)
         assertEquals("""{"haha":"12:11:02"}""", teststr)
 
     }
-
-    class LocalTimeTest(val haha: LocalTime)
 
     @JsonDeserialize
     class UnwrappedIsFalseBean {

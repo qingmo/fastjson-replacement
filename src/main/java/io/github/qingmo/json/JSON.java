@@ -36,7 +36,6 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
-import com.fasterxml.jackson.module.kotlin.KotlinModule;
 import io.github.qingmo.json.exception.JSONException;
 import io.github.qingmo.json.internal.MultiDateDeserializer;
 
@@ -59,8 +58,6 @@ public final class JSON {
 
         objectMapper.setSerializationInclusion(Include.NON_NULL);
         objectMapper.enable(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_AS_NULL);
-
-        objectMapper.registerModule(new KotlinModule());
 
         // 初始化JavaTimeModule
         JavaTimeModule javaTimeModule = new JavaTimeModule();
