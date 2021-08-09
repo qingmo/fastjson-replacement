@@ -21,10 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package io.github.qingmo.json.exception
+package io.github.qingmo.json
 
-class JSONException : RuntimeException {
-    constructor(message: String?) : super(message) {}
-    constructor(message: String?, cause: Throwable?) : super(message, cause) {}
-    constructor(cause: Throwable?) : super(cause!!.message, cause) {}
-}
+data class DataSample(val haha: String, val hoho: Int)

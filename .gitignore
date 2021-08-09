@@ -117,6 +117,7 @@ hs_err_pid*
 .idea/workspace.xml
 .idea/jarRepositories.xml
 .idea/gradle.xml
+.idea
 *.iml
 *.ipr
 

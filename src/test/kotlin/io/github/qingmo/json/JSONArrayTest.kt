@@ -46,7 +46,7 @@ internal class JSONArrayTest {
             }
         )
 
-        val value = JSONObject(mutableMapOf("a" to "b"))
+        val value = JSONObject(mutableMapOf("a" to "b") as Map<String, Any>?)
         data.add(value)
         data.add(null)
         assertEquals(value, data.getJSONObject(0))

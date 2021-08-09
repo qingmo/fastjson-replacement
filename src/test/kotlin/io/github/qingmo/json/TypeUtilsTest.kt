@@ -24,11 +24,13 @@
 package io.github.qingmo.json
 
 import io.github.qingmo.json.exception.JSONException
+import io.github.qingmo.json.internal.TypeUtils
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
+import java.lang.reflect.Constructor
+import java.lang.reflect.InvocationTargetException
 import java.math.BigDecimal
 import java.math.BigInteger
-import java.math.RoundingMode
 import kotlin.test.assertFails
 import kotlin.test.assertFailsWith
 
@@ -128,7 +130,6 @@ internal class TypeUtilsTest {
         assertEquals(BigDecimal.ONE, TypeUtils.castToBigDecimal(BigDecimal.ONE))
         assertEquals(BigDecimal.ONE, TypeUtils.castToBigDecimal(BigInteger("1")))
         assertEquals(BigDecimal("2"), TypeUtils.castToBigDecimal(BigInteger("2")))
-        assertNull(TypeUtils.castToBigDecimal(emptyMap<Any, Any>()))
         assertFails { TypeUtils.castToBigDecimal(mapOf("1" to "2")) }
         assertNull(TypeUtils.castToBigDecimal(""))
         assertNull(TypeUtils.castToBigDecimal("null"))
@@ -359,5 +360,40 @@ internal class TypeUtilsTest {
         assertEquals(0, TypeUtils.longValue(null))
         assertEquals(0, TypeUtils.intValue(null))
         assertEquals(0, TypeUtils.shortValue(null))
+    }
+
+    @Test
+    fun `test private constructor`() {
+        val javaClazz = TypeUtils::class.java
+        val con: Constructor<TypeUtils> = javaClazz.getDeclaredConstructor()
+        con.isAccessible = true
+        assertFailsWith(
+            exceptionClass = InvocationTargetException::class,
+            message = "can not instance static object",
+            block = {
+                con.newInstance()
+            }
+        )
+    }
+
+    @Test
+    fun `test shortValue`() {
+        assertEquals(0, TypeUtils.shortValue(null))
+        assertEquals(0, TypeUtils.shortValue(BigDecimal.ZERO))
+        assertEquals(1, TypeUtils.shortValue(BigDecimal.ONE))
+    }
+
+    @Test
+    fun `test intValue`() {
+        assertEquals(0, TypeUtils.intValue(null))
+        assertEquals(0, TypeUtils.intValue(BigDecimal.ZERO))
+        assertEquals(1, TypeUtils.intValue(BigDecimal.ONE))
+    }
+
+    @Test
+    fun `test longValue`() {
+        assertEquals(0, TypeUtils.longValue(null))
+        assertEquals(0, TypeUtils.longValue(BigDecimal.ZERO))
+        assertEquals(1, TypeUtils.longValue(BigDecimal.ONE))
     }
 }

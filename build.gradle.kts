@@ -34,10 +34,10 @@ repositories {
 dependencies {
     val jacksonModuleVersion = "2.12.3"
     implementation(kotlin("stdlib"))
+//    implementation("com.fasterxml.jackson.core:jackson-databind:${jacksonModuleVersion}")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:${jacksonModuleVersion}")
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jacksonModuleVersion}")
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    testImplementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
     implementation("joda-time:joda-time:2.10.10")
 
@@ -51,7 +51,7 @@ tasks {
             xml.required.set(true)
             xml.isEnabled = true
             xml.destination = file("${buildDir}/reports/jacoco/report.xml")
-            html.isEnabled = false
+            html.isEnabled = true
             csv.isEnabled = false
         }
     }

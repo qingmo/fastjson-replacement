@@ -23,20 +23,17 @@
  */
 package io.github.qingmo.json
 
-import java.util.*
-import kotlin.test.fail
+import org.junit.jupiter.api.Test
+import kotlin.test.assertEquals
 
-object TestUtils {
+class DataClassSupportTest {
 
-    fun verifyException(e: Throwable, vararg matches: String) {
-        val msg = e.message?.lowercase(Locale.getDefault()) ?: ""
-        val lmsg = msg.lowercase(Locale.getDefault())
-        for (match in matches) {
-            val lmatch = match.lowercase(Locale.getDefault())
-            if (lmsg.indexOf(lmatch) >= 0) {
-                return
-            }
-        }
-        fail("Expected an exception with one of substrings [${JSON.toJSONString(matches)}]: got one with message ${msg}")
+    @Test
+    fun `test support kotlin dataclass type`() {
+        val dataSample = DataSample("1", 2)
+        val strRet = JSON.toJSONString(dataSample)
+        val targetObj = JSON.parseObject(strRet, DataSample::class.java)
+        assertEquals(dataSample.haha, targetObj.haha)
+        assertEquals(dataSample.hoho, targetObj.hoho)
     }
 }
