@@ -21,22 +21,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package io.github.qingmo.json
+package io.github.qingmo.json.datas;
 
-import java.util.*
-import kotlin.test.fail
+public class TestClass {
+    public TestClass() {
+    }
 
-object TestUtils {
+    public TestClass(String foo) {
+        this.foo = foo;
+    }
 
-    fun verifyException(e: Throwable, vararg matches: String) {
-        val msg = e.message?.lowercase(Locale.getDefault()) ?: ""
-        val lmsg = msg.lowercase(Locale.getDefault())
-        for (match in matches) {
-            val lmatch = match.lowercase(Locale.getDefault())
-            if (lmsg.indexOf(lmatch) >= 0) {
-                return
-            }
-        }
-        fail("Expected an exception with one of substrings [${JSON.toJSONString(matches)}]: got one with message ${msg}")
+    private String foo;
+
+    public String getFoo() {
+        return foo;
+    }
+
+    public void setFoo(String foo) {
+        this.foo = foo;
     }
 }

@@ -27,14 +27,8 @@ import io.github.qingmo.json.exception.JSONException
 import org.intellij.lang.annotations.Language
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
-import java.util.Date
-
-import java.util.HashMap
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertNotNull
-import kotlin.test.assertTrue
-import kotlin.test.fail
+import java.util.*
+import kotlin.test.*
 
 
 class ConvertTest {

@@ -21,10 +21,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package io.github.qingmo.json.exception
+package io.github.qingmo.json.exception;
 
-class JSONException : RuntimeException {
-    constructor(message: String?) : super(message) {}
-    constructor(message: String?, cause: Throwable?) : super(message, cause) {}
-    constructor(cause: Throwable?) : super(cause!!.message, cause) {}
+public class JSONException extends RuntimeException {
+
+    public JSONException(String message) {
+        super(message);
+    }
+
+    public JSONException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public JSONException(Throwable cause) {
+        super(cause.getMessage(), cause);
+    }
 }

@@ -26,12 +26,8 @@ package io.github.qingmo.json
 import io.github.qingmo.json.exception.JSONException
 import org.intellij.lang.annotations.Language
 import java.text.SimpleDateFormat
-import java.util.Date
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertFailsWith
-import kotlin.test.assertNotNull
-import kotlin.test.assertTrue
+import java.util.*
+import kotlin.test.*
 
 
 class MutilDateFormatTest {

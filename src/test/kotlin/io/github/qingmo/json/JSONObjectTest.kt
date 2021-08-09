@@ -23,6 +23,7 @@
  */
 package io.github.qingmo.json
 
+import io.github.qingmo.json.datas.TestClass
 import io.github.qingmo.json.exception.JSONException
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
@@ -38,7 +39,7 @@ internal class JSONObjectTest {
         assertNotNull(jsonObject)
         assertNull(jsonObject.getJSONObject("haha"))
         jsonObject.put("haha", JSONObject())
-        jsonObject.put("foo", JSONArray(mutableListOf("a")))
+        jsonObject.put("foo", JSONArray(mutableListOf<Any>("a")))
         assertNotNull(jsonObject["haha"])
         assertNotNull(jsonObject.getJSONObject("haha"))
         assertTrue(jsonObject.getJSONObject("haha") is JSONObject)
@@ -59,8 +60,8 @@ internal class JSONObjectTest {
         assertTrue(jsonObject.containsValue("bar"))
         assertTrue(jsonObject.containsKey("foo"))
         assertFalse(jsonObject.containsKey("giegie"))
-        assertFalse(jsonObject.containsKey(1))
-        assertNull(jsonObject.remove(1))
+        assertFalse(jsonObject.containsKey("1"))
+        assertNull(jsonObject.remove("1"))
         jsonObject.remove("haha")
         assertEquals(1, jsonObject.size)
         assertEquals("""{"foo":"bar"}""", jsonObject.toString())
@@ -195,5 +196,4 @@ internal class JSONObjectTest {
 
     }
 
-    data class TestClass(val foo: String)
 }

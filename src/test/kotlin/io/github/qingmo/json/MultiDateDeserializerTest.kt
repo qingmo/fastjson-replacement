@@ -26,10 +26,14 @@ package io.github.qingmo.json
 import com.fasterxml.jackson.core.JsonParseException
 import com.fasterxml.jackson.core.io.IOContext
 import com.fasterxml.jackson.core.json.UTF8DataInputJsonParser
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.databind.node.NullNode
+import com.fasterxml.jackson.databind.node.TextNode
+import io.github.qingmo.json.datas.TestDate
+import io.github.qingmo.json.exception.JSONException
 import io.github.qingmo.json.internal.MultiDateDeserializer
 import org.junit.jupiter.api.Test
-import java.util.Calendar
-import java.util.Date
+import java.util.*
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertNotNull
@@ -41,8 +45,8 @@ internal class MultiDateDeserializerTest {
     fun `test illegelArgument with deserialize`() {
         val deserializer = MultiDateDeserializer()
         assertFailsWith(
-            exceptionClass = JsonParseException::class,
-            message = "Unparseable date with empty value",
+            exceptionClass = JSONException::class,
+            message = "Unparseable date with empty JsonParser.",
             block = {
                 deserializer.deserialize(null, null)
             }
@@ -57,10 +61,44 @@ internal class MultiDateDeserializerTest {
         )
         jsonParser.codec = null
         assertFailsWith(
+            exceptionClass = JSONException::class,
+            message = "Unparseable date with empty ObjectCodec.",
+            block = {
+                deserializer.deserialize(jsonParser, null)
+            }
+        )
+        val objectMapper = ObjectMapper()
+        val createParser = objectMapper.createParser("")
+        assertFailsWith(
             exceptionClass = JsonParseException::class,
             message = "Unparseable date with empty value",
             block = {
-                deserializer.deserialize(jsonParser, null)
+                deserializer.deserialize(createParser, null)
+            }
+        )
+        val createParser2 = objectMapper.createParser(NullNode.getInstance().toString())
+        assertFailsWith(
+            exceptionClass = JsonParseException::class,
+            message = "Unparseable date with empty value",
+            block = {
+                deserializer.deserialize(createParser2, null)
+            }
+        )
+        val createParser3 = objectMapper.createParser(TextNode.valueOf("").toString())
+        assertFailsWith(
+            exceptionClass = JsonParseException::class,
+            message = "Unparseable date with empty value",
+            block = {
+                deserializer.deserialize(createParser3, null)
+            }
+        )
+
+        val createParser4 = objectMapper.createParser(TextNode.valueOf("   ").toString())
+        assertFailsWith(
+            exceptionClass = JsonParseException::class,
+            message = "Unparseable date with empty value",
+            block = {
+                deserializer.deserialize(createParser4, null)
             }
         )
     }
@@ -111,6 +149,4 @@ internal class MultiDateDeserializerTest {
         assertEquals(5, calendar.get(Calendar.DAY_OF_MONTH))
         assertEquals(18, calendar.get(Calendar.HOUR_OF_DAY))
     }
-
-    data class TestDate(val haha: Date)
 }

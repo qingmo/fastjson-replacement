@@ -30,16 +30,11 @@ import com.fasterxml.jackson.databind.node.IntNode
 import com.fasterxml.jackson.databind.node.NullNode
 import io.github.qingmo.json.exception.JSONException
 import org.junit.jupiter.api.Test
+import java.lang.reflect.Constructor
+import java.lang.reflect.InvocationTargetException
 import java.time.LocalTime
-import java.util.Calendar
-import java.util.Date
-import java.util.TimeZone
-import kotlin.test.assertEquals
-import kotlin.test.assertFailsWith
-import kotlin.test.assertFalse
-import kotlin.test.assertNotNull
-import kotlin.test.assertNull
-import kotlin.test.assertTrue
+import java.util.*
+import kotlin.test.*
 
 
 class JSONTest {
@@ -236,20 +231,33 @@ class JSONTest {
     }
 
     @Test
+    fun `test private contructor`() {
+        val javaClazz = JSON::class.java
+        val con: Constructor<JSON> = javaClazz.getDeclaredConstructor()
+        con.isAccessible = true
+        assertFailsWith(
+            exceptionClass = InvocationTargetException::class,
+            message = "can not instance static object",
+            block = {
+                con.newInstance()
+            }
+        )
+    }
+
+    @Test
     fun `test LocalTime`() {
-       val data = """{"haha":"12:11:01"}"""
+        val data = """{"haha":"12:11:01"}"""
         val ret = JSON.parseObject(data, LocalTimeTest::class.java)
         assertNotNull(ret)
-        assertEquals(12, ret.haha.hour)
-        assertEquals(11, ret.haha.minute)
-        assertEquals(1, ret.haha.second)
-        val test = LocalTimeTest(LocalTime.of(ret.haha.hour, ret.haha.minute, 2, 0))
+        assertEquals(12, ret.haha!!.hour)
+        assertEquals(11, ret.haha!!.minute)
+        assertEquals(1, ret.haha!!.second)
+        val test = LocalTimeTest(LocalTime.of(ret.haha!!.hour, ret.haha!!.minute, 2, 0))
         val teststr = JSON.toJSONString(test)
         assertEquals("""{"haha":"12:11:02"}""", teststr)
 
     }
 
-    data class LocalTimeTest(val haha: LocalTime)
     @JsonDeserialize
     class UnwrappedIsFalseBean {
 
