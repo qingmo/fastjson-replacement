@@ -24,6 +24,7 @@
 package io.github.qingmo.json
 
 import io.github.qingmo.json.JSON.parseArray
+import io.github.qingmo.json.internal.TypeUtils
 import java.math.BigDecimal
 import java.math.BigInteger
 import java.util.ArrayList

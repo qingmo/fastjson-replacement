@@ -18,12 +18,12 @@ plugins {
     `java-library`
     `maven-publish`
     id("com.github.hierynomus.license") version "0.15.0"
-    `signing`
-    `jacoco`
+    signing
+    jacoco
 }
 
 group = "io.github.qingmo"
-version = "1.0.1"
+version = "1.0.2"
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 repositories {

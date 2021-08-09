@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package io.github.qingmo.json
+package io.github.qingmo.json.internal
 
 import io.github.qingmo.json.exception.JSONException
 import java.math.BigDecimal

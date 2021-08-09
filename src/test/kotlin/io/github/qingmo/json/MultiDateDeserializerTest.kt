@@ -26,6 +26,7 @@ package io.github.qingmo.json
 import com.fasterxml.jackson.core.JsonParseException
 import com.fasterxml.jackson.core.io.IOContext
 import com.fasterxml.jackson.core.json.UTF8DataInputJsonParser
+import io.github.qingmo.json.internal.MultiDateDeserializer
 import org.junit.jupiter.api.Test
 import java.util.Calendar
 import java.util.Date

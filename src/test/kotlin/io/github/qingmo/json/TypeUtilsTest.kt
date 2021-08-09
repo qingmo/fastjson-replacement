@@ -24,11 +24,11 @@
 package io.github.qingmo.json
 
 import io.github.qingmo.json.exception.JSONException
+import io.github.qingmo.json.internal.TypeUtils
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import java.math.BigDecimal
 import java.math.BigInteger
-import java.math.RoundingMode
 import kotlin.test.assertFails
 import kotlin.test.assertFailsWith
 
@@ -213,7 +213,7 @@ internal class TypeUtilsTest {
     @Test
     fun `test castToDouble`() {
         assertNull(TypeUtils.castToDouble(null))
-        val delta = 1.2-TypeUtils.castToDouble(1.2f)!!
+        val delta = 1.2- TypeUtils.castToDouble(1.2f)!!
         assertTrue(Math.abs(delta) < 0.000001)
         assertEquals(1.0, TypeUtils.castToDouble(1))
         assertEquals(2.3, TypeUtils.castToDouble(2.3))

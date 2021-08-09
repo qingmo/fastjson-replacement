@@ -21,13 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package io.github.qingmo.json
+package io.github.qingmo.json.internal
 
 import com.fasterxml.jackson.core.JsonParseException
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer
+import io.github.qingmo.json.JSON
 import org.joda.time.format.ISODateTimeFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat

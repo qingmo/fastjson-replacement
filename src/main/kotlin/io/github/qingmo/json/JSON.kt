@@ -27,6 +27,7 @@ import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.JavaType
 import com.fasterxml.jackson.databind.JsonNode
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.ser.std.DateSerializer
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer
@@ -35,9 +36,10 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.fasterxml.jackson.module.kotlin.KotlinModule
 import com.fasterxml.jackson.module.kotlin.readValue
 import io.github.qingmo.json.exception.JSONException
+import io.github.qingmo.json.internal.MultiDateDeserializer
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -51,12 +53,12 @@ object JSON {
     val DATE_PATTERN = "yyyy-MM-dd"
     val TIME_PATTERN = "HH:mm:ss"
 
-    private val objectMapper = jacksonObjectMapper()
+    private val objectMapper = ObjectMapper()
 
     init {
         objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL)
         objectMapper.enable(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_AS_NULL)
-
+        objectMapper.registerModule(KotlinModule())
         // 初始化JavaTimeModule
         val javaTimeModule = JavaTimeModule()
         //处理LocalDateTime
@@ -80,6 +82,7 @@ object JSON {
         objectMapper.registerModule(javaTimeModule)
     }
 
+    @JvmStatic
     fun toJSONString(jsonString: Any?): String {
         return try {
             objectMapper.writeValueAsString(jsonString)
@@ -88,6 +91,7 @@ object JSON {
         }
     }
 
+    @JvmStatic
     fun parse(jsonString: String): Any {
         if (isJsonObj(jsonString)) {
             return parseObject(jsonString)
@@ -101,6 +105,7 @@ object JSON {
         }
     }
 
+    @JvmStatic
     fun parseObject(jsonString: String?): JSONObject {
         try {
             return objectMapper.readValue(jsonString!!)
@@ -109,6 +114,7 @@ object JSON {
         }
     }
 
+    @JvmStatic
     fun <T> parseObject(jsonString: String?, clazz: Class<T>?): T {
         return try {
             objectMapper.readValue(jsonString, clazz)
@@ -117,6 +123,7 @@ object JSON {
         }
     }
 
+    @JvmStatic
     fun parseArray(jsonString: String?): JSONArray {
         try {
             val result: JSONArray = objectMapper.readValue(jsonString!!)
@@ -126,6 +133,7 @@ object JSON {
         }
     }
 
+    @JvmStatic
     fun <T> parseArray(jsonString: String?, clazz: Class<T>?): List<T> {
         return try {
             val javaType: JavaType = objectMapper.typeFactory.constructParametricType(MutableList::class.java, clazz)
@@ -141,6 +149,7 @@ object JSON {
      * @param str 字符串
      * @return 是否为JSON字符串
      */
+    @JvmStatic
     fun isJson(str: String?): Boolean {
         return isJsonObj(str) || isJsonArray(str)
     }
@@ -151,6 +160,7 @@ object JSON {
      * @param str 字符串
      * @return 是否为JSON字符串
      */
+    @JvmStatic
     fun isJsonObj(str: String?): Boolean {
         return if (str.isNullOrBlank()) {
             false
@@ -165,6 +175,7 @@ object JSON {
      * @param str 字符串
      * @return 是否为JSON字符串
      */
+    @JvmStatic
     fun isJsonArray(str: String?): Boolean {
         return if (str.isNullOrBlank()) {
             false
