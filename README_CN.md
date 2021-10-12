@@ -3,7 +3,7 @@
 # Fastjson-replacement
 [![codecov](https://codecov.io/gh/qingmo/fastjson-replacement/branch/main/graph/badge.svg?token=OZQG1NVXDX)](https://codecov.io/gh/qingmo/fastjson-replacement) [![License](https://img.shields.io/badge/License-MIT-brightgreen)](https://mit-license.org/) [![quality gate](https://sonarcloud.io/api/project_badges/measure?project=qingmo_fastjson-replacement&metric=alert_status)](https://sonarcloud.io/dashboard?id=qingmo_fastjson-replacement) [![Codacy Security Scan](https://github.com/qingmo/fastjson-replacement/actions/workflows/codacy-analysis.yml/badge.svg)](https://github.com/qingmo/fastjson-replacement/actions/workflows/codacy-analysis.yml) [![build](https://github.com/qingmo/fastjson-replacement/actions/workflows/build.yml/badge.svg)](https://github.com/qingmo/fastjson-replacement/actions/workflows/build.yml)
 
-目前版本`1.0.2`具备支持生产环境使用能力。
+目前版本`1.0.3`具备支持生产环境使用能力。
 ## `Fastjson-replacement`是什么    
 `Fastjson-replacement` 是一个用于替换`Fastjson`实现替换为`Jackson`实现的桥接模式工具，这让习惯于`Fastjson`用法的开发者或者已经大批量使用`Fastjson`的遗留工程代码可以轻松的做出改变，而无需改变现有的使用习惯与人体工程学体验。
 
@@ -29,14 +29,14 @@
 <dependency>
     <groupId>io.github.qingmo</groupId>
     <artifact>fastjson-replacement</artifact>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
 </dependency>
 ```
 
 `gradle`
 
 ```kotlin
-implementation("io.github.qingmo:fastjson-replacement:1.0.2")
+implementation("io.github.qingmo:fastjson-replacement:1.0.3")
 ```
 
 
@@ -49,7 +49,7 @@ implementation("io.github.qingmo:fastjson-replacement:1.0.2")
 <dependency>
     <groupId>io.github.qingmo</groupId>
     <artifactId>fastjson-replacement</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <exclusions>
         <exclusion>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -70,7 +70,7 @@ implementation("io.github.qingmo:fastjson-replacement:1.0.2")
 `gradle`
 
 ```kotlin
-implementation("io.github.qingmo:fastjson-replacement:1.0.2") {
+implementation("io.github.qingmo:fastjson-replacement:1.0.3") {
     exclude(group = "com.fasterxml.jackson.core")
     exclude(group = "com.fasterxml.jackson")
 }

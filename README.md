@@ -3,7 +3,7 @@
 # Fastjson-replacement
 [![codecov](https://codecov.io/gh/qingmo/fastjson-replacement/branch/main/graph/badge.svg?token=OZQG1NVXDX)](https://codecov.io/gh/qingmo/fastjson-replacement) [![License](https://img.shields.io/badge/License-MIT-brightgreen)](https://mit-license.org/) [![quality gate](https://sonarcloud.io/api/project_badges/measure?project=qingmo_fastjson-replacement&metric=alert_status)](https://sonarcloud.io/dashboard?id=qingmo_fastjson-replacement) [![Codacy Security Scan](https://github.com/qingmo/fastjson-replacement/actions/workflows/codacy-analysis.yml/badge.svg)](https://github.com/qingmo/fastjson-replacement/actions/workflows/codacy-analysis.yml) [![build](https://github.com/qingmo/fastjson-replacement/actions/workflows/build.yml/badge.svg)](https://github.com/qingmo/fastjson-replacement/actions/workflows/build.yml)
 
-Current version of `1.0.2` is product ready.
+Current version of `1.0.3` is product ready.
 ## What's `Fastjson-replacement`?
 `Fastjson-replacement` is a Bridge Pattern for developers or lagency projects which are used to `Fastjson` usage to replace  
 `Fastjson` implementation with `Jackson` implementation.
@@ -30,14 +30,14 @@ Use default `jackson`version（current version is:`1.12.3`) proivded by current 
 <dependency>
     <groupId>io.github.qingmo</groupId>
     <artifact>fastjson-replacement</artifact>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
 </dependency>
 ```
 
 `gradle`
 
 ```kotlin
-implementation("io.github.qingmo:fastjson-replacement:1.0.2")
+implementation("io.github.qingmo:fastjson-replacement:1.0.3")
 ```
 
 
@@ -50,7 +50,7 @@ Use custom `jackson`version defined by user's project
 <dependency>
     <groupId>io.github.qingmo</groupId>
     <artifactId>fastjson-replacement</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <exclusions>
         <exclusion>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -71,7 +71,7 @@ Use custom `jackson`version defined by user's project
 `gradle`
 
 ```kotlin
-implementation("io.github.qingmo:fastjson-replacement:1.0.2") {
+implementation("io.github.qingmo:fastjson-replacement:1.0.3") {
     exclude(group = "com.fasterxml.jackson.core")
     exclude(group = "com.fasterxml.jackson")
 }

@@ -48,11 +48,11 @@ public class JSONObject implements Map<String, Object> {
         this.map = new HashMap<>(size);
     }
 
-    String toJSONString() {
+    public String toJSONString() {
         return JSON.toJSONString(this.map);
     }
 
-    JSONObject getJSONObject(String key) {
+    public JSONObject getJSONObject(String key) {
         Object value = map.get(key);
         if (value == null) {
             return null;
@@ -63,7 +63,7 @@ public class JSONObject implements Map<String, Object> {
         return JSON.parseObject(JSON.toJSONString(value));
     }
 
-    JSONArray getJSONArray(String key) {
+    public JSONArray getJSONArray(String key) {
         Object value = map.get(key);
         if (value == null) {
             return new JSONArray();
@@ -83,7 +83,7 @@ public class JSONObject implements Map<String, Object> {
         return JSON.parseObject(JSON.toJSONString(obj), clazz);
     }
 
-    Boolean getBoolean(String key) {
+    public Boolean getBoolean(String key) {
         Object value = map.get(key);
         if (value == null) {
             return null;
@@ -91,7 +91,7 @@ public class JSONObject implements Map<String, Object> {
         return TypeUtils.castToBoolean(value);
     }
 
-    Boolean getBooleanValue(String key) {
+    public Boolean getBooleanValue(String key) {
         Object value = map.get(key);
         try {
             return TypeUtils.castToBoolean(value);
@@ -100,12 +100,12 @@ public class JSONObject implements Map<String, Object> {
         }
     }
 
-    Byte getByte(String key) {
+    public Byte getByte(String key) {
         Object value = map.get(key);
         return TypeUtils.castToByte(value);
     }
 
-    Byte getByteValue(String key) {
+    public Byte getByteValue(String key) {
         Object value = map.get(key);
         try {
             return TypeUtils.castToByte(value);
@@ -114,12 +114,12 @@ public class JSONObject implements Map<String, Object> {
         }
     }
 
-    Short getShort(String key) {
+    public Short getShort(String key) {
         Object value = map.get(key);
         return TypeUtils.castToShort(value);
     }
 
-    Short getShortValue(String key) {
+    public Short getShortValue(String key) {
         Object value = map.get(key);
         try {
             return TypeUtils.castToShort(value);
@@ -128,12 +128,12 @@ public class JSONObject implements Map<String, Object> {
         }
     }
 
-    Integer getInteger(String key) {
+    public Integer getInteger(String key) {
         Object value = map.get(key);
         return TypeUtils.castToInt(value);
     }
 
-    Integer getIntValue(String key) {
+    public Integer getIntValue(String key) {
         Object value = map.get(key);
         try {
             return TypeUtils.castToInt(value);
@@ -142,12 +142,12 @@ public class JSONObject implements Map<String, Object> {
         }
     }
 
-    Long getLong(String key) {
+    public Long getLong(String key) {
         Object value = map.get(key);
         return TypeUtils.castToLong(value);
     }
 
-    Long getLongValue(String key) {
+    public Long getLongValue(String key) {
         Object value = map.get(key);
         try {
             return TypeUtils.castToLong(value);
@@ -156,12 +156,12 @@ public class JSONObject implements Map<String, Object> {
         }
     }
 
-    Float getFloat(String key) {
+    public Float getFloat(String key) {
         Object value = map.get(key);
         return TypeUtils.castToFloat(value);
     }
 
-    Float getFloatValue(String key) {
+    public Float getFloatValue(String key) {
         Object value = map.get(key);
         try {
             return TypeUtils.castToFloat(value);
@@ -170,12 +170,12 @@ public class JSONObject implements Map<String, Object> {
         }
     }
 
-    Double getDouble(String key) {
+    public Double getDouble(String key) {
         Object value = map.get(key);
         return TypeUtils.castToDouble(value);
     }
 
-    Double getDoubleValue(String key) {
+    public Double getDoubleValue(String key) {
         Object value = map.get(key);
         try {
             return TypeUtils.castToDouble(value);
@@ -184,17 +184,17 @@ public class JSONObject implements Map<String, Object> {
         }
     }
 
-    BigDecimal getBigDecimal(String key) {
+    public BigDecimal getBigDecimal(String key) {
         Object value = map.get(key);
         return TypeUtils.castToBigDecimal(value);
     }
 
-    BigInteger getBigInteger(String key) {
+    public BigInteger getBigInteger(String key) {
         Object value = map.get(key);
         return TypeUtils.castToBigInteger(value);
     }
 
-    String getString(String key) {
+    public String getString(String key) {
         Object value = map.get(key);
         if (value == null) {
             return null;

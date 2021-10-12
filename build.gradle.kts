@@ -1,10 +1,10 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import java.util.Calendar
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 import groovy.util.Node
 import groovy.util.NodeList
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.net.URI
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.Calendar
 
 val signingKeyId: String? by project
 val signingPassword: String? by project
@@ -23,7 +23,7 @@ plugins {
 }
 
 group = "io.github.qingmo"
-version = "1.0.2"
+version = "1.0.3"
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 repositories {
@@ -155,8 +155,17 @@ publishing {
             val snapshotsRepoUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
             url = if ((project.version as String).endsWith("SNAPSHOT")) URI(snapshotsRepoUrl) else URI(releasesRepoUrl)
             credentials {
-                setUsername(username)
-                setPassword(password)
+                if (username != null) {
+                    setUsername(username)
+                } else {
+                    setUsername(System.getProperty("MAVEN_USERNAME"))
+                }
+
+                if (password != null) {
+                    setPassword(password)
+                } else {
+                    setPassword(System.getProperty("MAVEN_PASSWORD"))
+                }
             }
         }
 
