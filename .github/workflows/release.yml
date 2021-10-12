@@ -16,8 +16,11 @@ jobs:
           distribution: 'adopt'
       - name: Validate Gradle wrapper
         uses: gradle/wrapper-validation-action@e6e38bacfdf1a337459f332974bb2327a31aaf4b
-      - name: Publish package
-        run: gradle publish
+      - name: Gradle Build Action
+        uses: gradle/gradle-build-action@v2.0-beta.4
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+        with:
+          arguments: clean publish
+
