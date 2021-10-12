@@ -15,8 +15,6 @@ jobs:
         with:
           java-version: '8'
           distribution: 'adopt'
-          gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }} # Value of the GPG private key to import
-          gpg-passphrase: ${{ secrets.GPG_PASSPHRASE }} # env variable for GPG private key passphrase
       - name: Validate Gradle wrapper
         uses: gradle/wrapper-validation-action@e6e38bacfdf1a337459f332974bb2327a31aaf4b
       - name: Gradle Build Action
@@ -25,6 +23,7 @@ jobs:
           ORG_GRADLE_PROJECT_mavenUserName: ${{ secrets.OSSRH_USERNAME }}
           ORG_GRADLE_PROJECT_mavenPassword: ${{ secrets.OSSRH_TOKEN }}
           ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.GPG_PASSPHRASE }}
+          ORG_GRADLE_PROJECT_signingKey: ${{ secrets.GPG_PRIVATE_KEY }}
         with:
           arguments: clean publish
 
