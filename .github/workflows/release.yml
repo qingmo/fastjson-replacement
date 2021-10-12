@@ -20,8 +20,8 @@ jobs:
       - name: Gradle Build Action
         uses: gradle/gradle-build-action@v2.0-beta.4
         env:
-          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-          MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+          ORG_GRADLE_PROJECT_mavenUserName: ${{ secrets.OSSRH_USERNAME }}
+          ORG_GRADLE_PROJECT_mavenPassword: ${{ secrets.OSSRH_TOKEN }}
         with:
           arguments: clean publish
 

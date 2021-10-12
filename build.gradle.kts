@@ -149,23 +149,14 @@ license {
 publishing {
     repositories {
         maven {
-            val username: String? by project
-            val password: String? by project
+            val mavenUserName: String by project
+            val mavenPassword: String by project
             val releasesRepoUrl = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
             val snapshotsRepoUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
             url = if ((project.version as String).endsWith("SNAPSHOT")) URI(snapshotsRepoUrl) else URI(releasesRepoUrl)
             credentials {
-                if (username != null) {
-                    setUsername(username)
-                } else {
-                    setUsername(System.getProperty("MAVEN_USERNAME"))
-                }
-
-                if (password != null) {
-                    setPassword(password)
-                } else {
-                    setPassword(System.getProperty("MAVEN_PASSWORD"))
-                }
+                setUsername(mavenUserName)
+                setPassword(mavenPassword)
             }
         }
 
