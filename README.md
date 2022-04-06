@@ -29,7 +29,7 @@ Use default `jackson`version（current version is:`1.12.3`) proivded by current 
 ```xml
 <dependency>
     <groupId>io.github.qingmo</groupId>
-    <artifact>fastjson-replacement</artifact>
+    <artifactId>fastjson-replacement</artifactId>
     <version>1.0.3</version>
 </dependency>
 ```
