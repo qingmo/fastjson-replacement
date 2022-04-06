@@ -28,7 +28,7 @@
 ```xml
 <dependency>
     <groupId>io.github.qingmo</groupId>
-    <artifact>fastjson-replacement</artifact>
+    <artifactId>fastjson-replacement</artifactId>
     <version>1.0.3</version>
 </dependency>
 ```
