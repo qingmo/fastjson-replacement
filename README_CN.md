@@ -112,9 +112,9 @@ import io.github.qingmo.json.JSONObject
 
   `Fastjson-replacement` 的性能测试成绩如下(基于 [json-comparsion](https://github.com/zysrxx/json-comparison)):
 
-  ![serialize_benchmark](/Users/Chaos/workspace/fastjson-replacement/docs/serialize_benchmark.png)
+  ![serialize_benchmark](./docs/serialize_benchmark.png)
 
-  ![deserialize_benchmark](/Users/Chaos/workspace/fastjson-replacement/docs/deserialize_benchmark.png)
+  ![deserialize_benchmark](./docs/deserialize_benchmark.png)
 
 ## 已知问题
 
